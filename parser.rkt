@@ -1,2 +1,2 @@
-# lang brag
+#lang brag
 ; your grammar goes here!
