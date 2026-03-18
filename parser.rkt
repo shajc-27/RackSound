@@ -1,3 +1,4 @@
 #lang brag
 
-; your grammar goes here!
+my-dsl : example | "!"
+example: "?"
