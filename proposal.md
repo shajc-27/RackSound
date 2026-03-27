@@ -1,4 +1,4 @@
-Names: Jack Shapely and Charles Reed 
+Names: Jack Shapley and Charles Reed 
 
 Documentation for Package :  https://web.archive.org/web/20260101215513/https://docs.racket-lang.org/rsound/index.html
 Possible helpful imports: rsound/single-cycle
