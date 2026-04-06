@@ -1,0 +1,1 @@
+("8.10" ta6le ("5c4c061a30ba38dc4b66ffa6f8d02817da256e08" . "d9010ab67eea4224c9b812c86c18c6be1d155016") (collects #"br" #"quicklang.rkt") (collects #"brag" #"support.rkt") (collects #"drracket" #"private" #"drracket-errortrace-key.rkt") (collects #"racket" #"runtime-config.rkt"))
