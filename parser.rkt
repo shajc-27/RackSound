@@ -2,16 +2,18 @@
 ; defining statements
 rsnd-program : [line] (/NEWLINE [line])*
 @statement : inst | play | stop | speed | *play | repeat
-inst   : "INSTRUMENT" ; add args...
+inst   : "INSTRUMENT" strum
 play   : "PLAY"  INTEGER
 stop   : "STOP"  INTEGER
 speed  : "SPEED" INTEGER
-*play  : "*PLAY" ;(handle piano-key) (handle piano-key)
+*play  : "*PLAY" strum strum
 repeat : "*REPEAT" INTEGER
 repend : "*END" ; unsure if this should be its own thing. Probably...?
+strum  : "TRUMPET" | "PIANO" | "DRUM" | "FLUTE" ;and so on.
+
 ; @ = unwraps a redundant statement line, basically stops from each line being in layered parentheses
 ; / = "Ignorer", parser throws away after.
-
+; to my knowledge '@' is moreso for readability, since it just "hides" the stuff.
 
 ; I just followed the proposal's keywords:
 
