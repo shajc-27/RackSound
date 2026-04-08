@@ -8,3 +8,11 @@
 (provide (rename-out [stacker-module-begin #%module-begin]))
 
 ; your expander goes here!
+
+
+;(define handle [arg #f]) 
+  ;(cond
+    ; COND INSTRUMENT
+    ; COND PLAY
+    ; COND PLAY*
+    ; COND REPEAT
