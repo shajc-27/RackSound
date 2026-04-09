@@ -2,13 +2,23 @@
 (require brag/support) 
 
 (define-lex-abbrev keyfamily (:+ (char-set "ABCDEFG")))
-(define-lex-abbrev octaves (:+ (char-set "12345678"))) 
+(define-lex-abbrev octave (:+ (char-set "12345678"))) 
 ;we're doing octaves 0-8 here. 
 
 (define lexer
   (lexer-srcloc
     ["\n" (token 'NEWLINE lexeme)]
     [whitespace (token lexeme #:skip? #t)]
-    [(from/stop-before "INSTRUMENT" "\n") (token 'strum lexeme)]))
+    [(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT") (token 'ARG lexeme)]
+    ["*PLAY" (cons (token 'ARG lexeme) (token 'ARG lexeme))] ; meant to go to next lexeme
+    [keyfamily (token 'KEYFAMILY lexeme)]
+    [octave (token 'OCTAVE lexeme)]
+    [key (token 'KEY ((keyfamily octave) (octave keyfamily)))]
+    [(:or (from/to "\"" "\"") (from/to "'" "'"))
+     (token 'STRING
+            (substringf lexeme
+                        1 (sub1 (string-length lexeme))))]))
+(provide lexer)
+
 
 
