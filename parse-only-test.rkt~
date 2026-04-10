@@ -1,4 +1,4 @@
-#lang racket_sound/parse-only
+#lang RackSound/parse-only
 INSTRUMENT va "STRING" 
 PLAY va E5
 REPEAT 5 
