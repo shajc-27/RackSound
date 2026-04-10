@@ -1,46 +1,23 @@
 #lang brag
-rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-rsnd-line : [rsnd-statement] [rsnd-rem]*
-@rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
-
-
-play : "PLAY" [rsnd-tone] 
-stop : "STOP" INTEGER 
-speed : "SPEED" INTEGER 
-playTogether : "PLAY-TOGETHER" [rsnd-tone] (/"," [rsnd-tone])* 
-repeat : "REPEAT" INTEGER
-repend : "END" 
-inst : "INSTRUMENT" rsnd-inst
-bpm : "SET BPM" INTEGER
-
-
-
-@rsnd-inst : rsnd-inst-ref rsnd-strum 
-@rsnd-inst-ref : STRING
-@rsnd-rem : [rsnd-tone] | INTEGER | VOID
-@rsnd-tone : (/"[" [inst] [rsnd-note] /"]") 
-@rsnd-strum : "TRUMPET" | "PIANO" | "DRUM" | "FLUTE" | "PURE" ;ETC
-@rsnd-note : STRING 
-
-
-
 ; defining statements
-#|rsnd-line : line-num [statement] [rsnd-arg]*
-;rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-;rsnd-arg : INTEGER | strum | key 
-;@line-num : INTEGER
-;@statement : inst | play | stop | speed | playTogether | repeat
+rsnd-program : [line] (/NEWLINE [line])*
+@statement : inst | play | stop | speed | *play | repeat
+@arg-spec : key | inst  
+@arg-int : INTEGER ; for STOP and SPEED 
 
-;inst   : "INSTRUMENT" strum
-;play   : "PLAY" strum key 
-;stop   : "STOP"  INTEGER
-;speed  : "SPEED" INTEGER
-;playTogether  : "PLAY-TOGETHER" strum key strum key 
-;repeat : "REPEAT" INTEGER
-;repend : "END" ;
+inst   : "INSTRUMENT" strum
+play   : "PLAY" strum key 
+stop   : "STOP"  INTEGER
+speed  : "SPEED" INTEGER
+*play  : "*PLAY" strum key strum key 
+repeat : "REPEAT" INTEGER
 
-;key    :  STRING
-;strum  : "TRUMPET" | "PIANO" | "DRUM" | "FLUTE" | "PURE"  ;and so on.
+
+
+repend : "END" ; 
+key    :  STRING INTEGER
+
+strum  : "TRUMPET" | "PIANO" | "DRUM" | "FLUTE" | "PURE"  ;and so on.
 
 ; @ = unwraps a redundant statement line, basically stops from each line being in layered parentheses
 ; / = "Ignorer", parser throws away after.

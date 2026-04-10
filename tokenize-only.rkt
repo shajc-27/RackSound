@@ -1,13 +1,14 @@
-#lang br/quicklang 
-(require brag/support "tokenizer.rkt") 
+#lang br/quicklang
+(require brag/support "tokenizer.rkt")
 
-(define (Read-syntax path port) 
-  (define tokens (apply-tokenizer make-tokenizer port)) 
-  (strip-bindings 
-    #`(module basic-tokens-mod basic/tokenize-only
-        #,@tokens)))
-(module+ reader (provide read-syntax)) 
+(define (read-syntax path port)
+  (define tokens (apply-tokenizer make-tokenizer port))
+  (strip-bindings
+   #`(module basic-tokens-mod basic/tokenize-only
+       #,@tokens)))
+(module+ reader (provide read-syntax))
 
 (define-macro (tokenize-only-mb TOKEN ...)
-              #'(#%module-begin (list TOKEN ...))) 
+  #'(#%module-begin
+     (list TOKEN ...)))
 (provide (rename-out [tokenize-only-mb #%module-begin]))
