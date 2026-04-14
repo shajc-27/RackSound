@@ -4,7 +4,7 @@
 (define (read-syntax path port)
   (define parse-tree (parse path (make-tokenizer port path)))
   (strip-bindings
-   #`(module basic-mod basic/expander
+   #`(module rs-mod racket_sound/expander
        #,parse-tree)))
 
 (module+ reader
