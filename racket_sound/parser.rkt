@@ -1,17 +1,17 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-rsnd-line : [rsnd-statement] [rsnd-rem]
+@rsnd-line : [rsnd-statement] [rsnd-rem]
 @rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
 
 
-play   : "PLAY" [rsnd-tone]
-stop   : "STOP" INTEGER 
-speed  : "SPEED" INTEGER 
-playTogether : "PLAY-TOGETHER" [rsnd-tone] (/"," [rsnd-tone])*
-repeat : "REPEAT" INTEGER
-repend : "END" 
-inst   : "INSTRUMENT" [rsnd-inst]
-bpm    : "SET BPM" INTEGER
+play   : /"PLAY" [rsnd-tone]
+stop   : /"STOP" INTEGER 
+speed  : /"SPEED" INTEGER  ;SPEED vs BPM?
+playTogether : /"PLAY*" [rsnd-tone] ([rsnd-tone])*
+repeat : /"REPEAT" INTEGER
+repend : /"END" 
+inst   : /"INSTRUMENT" [rsnd-inst]
+bpm    : /"SET BPM" INTEGER
 
 
 @rsnd-inst : STRUMTYPE
@@ -20,7 +20,7 @@ bpm    : "SET BPM" INTEGER
 ;@rsnd-inst-ref : STRING
 ;@rsnd-strum    : STRUMTYPE
 
-/rsnd-rem  : /REM  ; don't we ignore these? '/' doesn't seem to be doing as I meant...
+rsnd-rem  : REM  ; don't we ignore these? '/' doesn't seem to be doing as I meant...
 @rsnd-tone : STRUMTYPE NOTE
 
 ; @rsnd-note : STRING

@@ -14,7 +14,7 @@
     [whitespace (token lexeme #:skip? #t)]
     [(from/stop-before ";" "\n") (token 'REM lexeme)]
     
-    [(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT" "END") (token lexeme lexeme)]
+    [(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT" "END" "PLAY*") (token lexeme lexeme)]
     [strum     (token 'STRUMTYPE lexeme)]
     [note      (token 'NOTE lexeme)]
     [(:+ (char-set "0123456789")) (token 'INTEGER (string->number lexeme))]
