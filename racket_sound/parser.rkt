@@ -20,7 +20,7 @@ bpm    : /"SET BPM" INTEGER
 ;@rsnd-inst-ref : STRING
 ;@rsnd-strum    : STRUMTYPE
 
-rsnd-rem  : REM  ; don't we ignore these? '/' doesn't seem to be doing as I meant...
+rsnd-rem  : REM  ; ignore in expander
 @rsnd-tone : STRUMTYPE NOTE
 
 ; @rsnd-note : STRING
