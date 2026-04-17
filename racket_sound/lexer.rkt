@@ -12,7 +12,7 @@
   (lexer-srcloc
     ["\n" (token 'NEWLINE lexeme)]
     [whitespace (token lexeme #:skip? #t)]
-    [(from/stop-before ";" "\n") (token 'REM lexeme)]
+    [(from/stop-before ";" "\n") (token 'COMMENT lexeme)]
     
     [(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT" "END" "PLAY*") (token lexeme lexeme)]
     [strum     (token 'STRUMTYPE lexeme)]

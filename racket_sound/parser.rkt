@@ -1,6 +1,6 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-@rsnd-line : [rsnd-statement] [rsnd-rem]
+@rsnd-line : [rsnd-statement] [rsnd-comment]
 @rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
 
 
@@ -14,15 +14,15 @@ inst   : /"INSTRUMENT" [rsnd-inst]
 bpm    : /"SET BPM" INTEGER
 
 
-@rsnd-inst : STRUMTYPE
+;@rsnd-inst : STRUMTYPE
 ; alt inst definition -
-;@rsnd-inst     : [rsnd-inst-ref] [rsnd-strum]
-;@rsnd-inst-ref : STRING
-;@rsnd-strum    : STRUMTYPE
+@rsnd-inst     : [rsnd-inst-ref] [rsnd-strum]
+@rsnd-inst-ref : STRING
+@rsnd-strum    : STRUMTYPE
 
-rsnd-rem  : REM  ; ignore in expander
-@rsnd-tone : STRUMTYPE NOTE
-
+rsnd-comment  : COMMENT  ; ignore in expander
+;@rsnd-tone : STRUMTYPE NOTE
+@rsnd-tone : rsnd-inst NOTE
 ; @rsnd-note : STRING
 ;@rsnd-rem : [rsnd-tone] | INTEGER | VOID ; unsure what this bit even is
 ;@rsnd-tone : inst [rsnd-note] ;@rsnd-tone : (/"[" [inst] [rsnd-note] /"]")

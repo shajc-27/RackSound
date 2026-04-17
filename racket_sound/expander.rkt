@@ -27,7 +27,7 @@
 ; finally, we rename this module, which is called rsnd-module-begin to #%module-begin
 ; so that it becomes the top-level module for the reader
 (define-macro (rsnd-module-begin (rsnd-program LINE ...))
-  (with-pattern
+  (with-pattern ;CHANGE PATTERN?
       ([((rsnd-line NUM STMT ...) ...) #'(LINE ...)]
        [(LINE-FUNC ...) (prefix-id "line-" #'(NUM ...))])
     #'(#%module-begin
@@ -43,6 +43,7 @@
 (define (rsnd-end) (raise (end-program-signal))) ; rasie exception!
 (define (rsnd-goto expr) (raise (change-line-signal expr))) ; raise exception!
 
+; he said to drop srcloc, so abandon?
 (define (run line-table)
   (define line-vec ; create a vector of sorted line numbers: helps us decide where to start and what is next
     (list->vector (sort (hash-keys line-table) <)))
@@ -77,6 +78,13 @@
 
 
 (define (rsnd-rem val) (void)) ; void doesn't do anything! so when we see (rsnd-rem ...), we just do nothing!
+
+(define-macro (play tone)
+  ; build tone, then play?)
+  ;(play
+)
+
+; Don't think these apply to ours atm
 (define (rsnd-print . vals) ; rsnd-print could have an arbitrary number of values (hence the .)
   (displayln (string-append* (map ~a vals)))) ; map the values to strings (necessary if they're numbers)
 (define (rsnd-sum . vals) (apply + vals)) ; apply the + function to the values
