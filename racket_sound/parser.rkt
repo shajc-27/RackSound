@@ -20,7 +20,7 @@ rsnd-comment : COMMENT
 
 @rsnd-rem : [rsnd-tone] | INTEGER | VOID
 @rsnd-tone (/"[" (rsnd-inst rsnd-note)+ / "]")
-@rsnd-strum : STRING ;etc
+@rsnd-strum : "TRUMPET" | "PIANO" | "DRUM" | "FLUTE" | "PURE" ;etc
 @rsnd-note : STRING
 @rsnd-tone : STRUMTYPE NOTE
 

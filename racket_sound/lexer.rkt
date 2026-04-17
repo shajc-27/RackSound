@@ -71,11 +71,25 @@
  ;   [(:+ (char-set "0123456789")) (token 'INTEGER (string->number lexeme))]
  ;   [(:or "[" "]")  lexeme] 
     
+;<<<<<<< HEAD
 ;    [(:or (from/to "\"" "\"") (from/to "'" "'"))
 ;     (token 'STRING
  ;           (substring lexeme
 ;                        1 (sub1 (string-length lexeme))
   ;  ))]
 ;))
+;=======
+   ; [(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT" "END" "PLAY*") (token lexeme lexeme)]
+   ; [strum     (token 'STRUMTYPE lexeme)]
+   ; [note      (token 'NOTE lexeme)]
+    ;[(:+ (char-set "0123456789")) (token 'INTEGER (string->number lexeme))]
+    
+   ;[(:or (from/to "\"" "\"") (from/to "'" "'"))
+   ;  (token 'STRING
+   ;         (substring lexeme
+     ;                   1 (sub1 (string-length lexeme))
+ ;   ))]
+;))
+;>>>>>>> 6d0f63bdba224acdef73a32485fcae6163776c8c
 
 ;(provide lexer)
