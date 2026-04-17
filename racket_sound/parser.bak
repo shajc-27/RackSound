@@ -1,29 +1,29 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-rsnd-line : (rsnd-statement (rsnd-rem))
-@rsnd-statement : rsnd-play | rsnd-stop | rsnd-speed | rsnd-playTogether | rsnd-repeat | rsnd-repend | rsnd-instrument-dec
-
-rsnd-play   : /"PLAY" [rsnd-tone]
-rsnd-stop   : /"STOP" INTEGER 
-rsnd-speed  : /"SPEED" INTEGER  ;SPEED vs BPM?
-rsnd-playTogether : /"PLAY*" [rsnd-tone] (/","[rsnd-tone])*
-rsnd-repeat : /"REPEAT" INTEGER
-rsnd-repend : /"END" 
-rsnd-instrument-dec   : /"INSTRUMENT" [rsnd-inst]
-rsnd-bpm    : /"SET BPM" INTEGER
-
-rsnd-comment : COMMENT
+rsnd-line : [rsnd-statement] [rsnd-rem]
+@rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
 
 
-@rsnd-inst : [rsnd-inst-ref] [rsnd-strum]
-@rsnd-inst-ref : STRING
+play   : "PLAY" [rsnd-tone]
+stop   : "STOP" INTEGER 
+speed  : "SPEED" INTEGER 
+playTogether : "PLAY-TOGETHER" [rsnd-tone] (/"," [rsnd-tone])*
+repeat : "REPEAT" INTEGER
+repend : "END" 
+inst   : "INSTRUMENT" [rsnd-inst]
+bpm    : "SET BPM" INTEGER
 
-@rsnd-rem : [rsnd-tone] | INTEGER | VOID
-@rsnd-tone (/"[" (rsnd-inst rsnd-note)+ / "]")
-@rsnd-strum : STRING ;etc
-@rsnd-note : STRING
+
+@rsnd-inst : STRUMTYPE
+; alt inst definition -
+;@rsnd-inst     : [rsnd-inst-ref] [rsnd-strum]
+;@rsnd-inst-ref : STRING
+;@rsnd-strum    : STRUMTYPE
+
+/rsnd-rem  : /REM  ; don't we ignore these? '/' doesn't seem to be doing as I meant...
 @rsnd-tone : STRUMTYPE NOTE
 
+; @rsnd-note : STRING
 ;@rsnd-rem : [rsnd-tone] | INTEGER | VOID ; unsure what this bit even is
 ;@rsnd-tone : inst [rsnd-note] ;@rsnd-tone : (/"[" [inst] [rsnd-note] /"]")
 
