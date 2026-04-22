@@ -1,29 +1,29 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-rsnd-line : (rsnd-statement (rsnd-rem))
-@rsnd-statement : rsnd-play | rsnd-stop | rsnd-speed | rsnd-playTogether | rsnd-repeat | rsnd-repend | rsnd-instrument-dec
-
-rsnd-play   : /"PLAY" [rsnd-tone]
-rsnd-stop   : /"STOP" INTEGER 
-rsnd-speed  : /"SPEED" INTEGER  ;SPEED vs BPM?
-rsnd-playTogether : /"PLAY*" [rsnd-tone] (/","[rsnd-tone])*
-rsnd-repeat : /"REPEAT" INTEGER
-rsnd-repend : /"END" 
-rsnd-instrument-dec   : /"INSTRUMENT" [rsnd-inst]
-rsnd-bpm    : /"SET BPM" INTEGER
-
-rsnd-comment : COMMENT
+@rsnd-line : [rsnd-statement] [rsnd-comment]
+@rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
 
 
-@rsnd-inst : [rsnd-inst-ref] [rsnd-strum]
+play   : /"PLAY" [rsnd-tone]
+stop   : /"STOP" INTEGER 
+speed  : /"SPEED" INTEGER  ;SPEED vs BPM?
+playTogether : /"PLAY*" [rsnd-tone] ([rsnd-tone])*
+repeat : /"REPEAT" INTEGER
+repend : /"END" 
+inst   : /"INSTRUMENT" [rsnd-inst]
+bpm    : /"SET BPM" INTEGER
+
+
+;@rsnd-inst : STRUMTYPE
+; alt inst definition -
+@rsnd-inst     : [rsnd-inst-ref] [rsnd-strum]
 @rsnd-inst-ref : STRING
+@rsnd-strum    : STRUMTYPE
 
-@rsnd-rem : [rsnd-tone] | INTEGER | VOID
-@rsnd-tone (/"[" (rsnd-inst rsnd-note)+ / "]")
-@rsnd-strum : "TRUMPET" | "PIANO" | "DRUM" | "FLUTE" | "PURE" ;etc
-@rsnd-note : STRING
-@rsnd-tone : STRUMTYPE NOTE
-
+rsnd-comment  : COMMENT  ; ignore in expander
+;@rsnd-tone : STRUMTYPE NOTE
+@rsnd-tone : rsnd-inst NOTE
+; @rsnd-note : STRING
 ;@rsnd-rem : [rsnd-tone] | INTEGER | VOID ; unsure what this bit even is
 ;@rsnd-tone : inst [rsnd-note] ;@rsnd-tone : (/"[" [inst] [rsnd-note] /"]")
 

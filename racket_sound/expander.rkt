@@ -81,29 +81,21 @@
 (define (rsnd-program val)
   (display "rsnd-program not implemented"))
 (define (rsnd-rem val) (void)) ; void doesn't do anything! so when we see (rsnd-rem ...), we just do nothing!
+
+;AKWF_vgame: 001 - drum
+;
+;(define (rsnd- 
+
+
 ;the library provided sounds can be found in %appdata%/Racket/[version]/pkgs/rsound/rsound/contrib/
 ;(define-macro (play tone))
   ; build tone, then play?
+;
+;(play ref key 
+;(define (rsnd-play input)
+ ; (play (piano-tone (cdr input)))) 
+  
 
-(define (string->midi input)
-  (let* ([note (substring input 0 1)]
-    [octave (string->number (substring input 1 2))])
-    (cond
-      ([:or (< octave 0) (< octave 7)] (display "Error in expander: octave too large or too small. Range is 0-7"))
-      ([equal note "C"] (+ (* octave 12) 24))
-      ([:or [equal note "Db"] [equal note "C#"]] (+ (* octave 12) 25))
-      ([equal note "D"] (+ (*octave 12) 26))
-      ([:or [equal note "Eb"] [equal note "D#"]] (+ (* octave 12) 27))
-      ([equal note "E"] (+ (* octave 12) 28))
-      ([equal note "F"] (+ (* octave 12) 29))
-      ([:or [equal note "F#"] [equal note "Gb"]] (+ (* octave 12) 30))
-      ([equal note "G"] (+ (* octave 12) 31))
-      ([:or [equal note "G#"] [equal note "Ab"]] (+ (* octave 12) 32))
-      ([equal note "A"] (+ (* octave 12) 33))
-      ([:or [equal note "A#"] [equal note "Bb"]] (+ (* octave 12) 34))
-      ([equal note "B"] (+ (* octave 12) 35))
-      (else "UNABLE TO PARSE STRING INTO MIDI")))
-  )
   ;(cond [(string-prefix input "C")  
 
 ; Don't think these apply to ours atm
