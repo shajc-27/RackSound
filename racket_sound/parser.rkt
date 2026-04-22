@@ -1,18 +1,18 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-@rsnd-line : rsnd-line-num [rsnd-statement] [rsnd-inst | rsnd-strum | rsnd-tone]* 
-@rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
+@rsnd-line : rsnd-line-num [rsnd-statement]  ;([rsnd-statement] [rsnd-inst | rsnd-strum | rsnd-tone])*
+@rsnd-statement : play | stop | speed |rsnd-loop | inst
+@rsnd-loop: repeat /NEWLINE (rsnd-line [/NEWLINE])* repend
 
 @rsnd-line-num : INTEGER
-play   : /"PLAY" [rsnd-tone]
-stop   : /"STOP" INTEGER 
-speed  : /"SPEED" INTEGER  ;SPEED vs BPM?
-playTogether : /"PLAY*" [rsnd-tone] ([rsnd-tone])*
+play   : /"PLAY" [rsnd-tone] (/COMMA [rsnd-tone])*
+stop   : /"STOP"
+speed  : /"SPEED" ;SPEED vs BPM?
+;playTogether : /"*PLAY" [rsnd-tone] /COMMA ([rsnd-tone])*
 repeat : /"REPEAT" INTEGER
-repend : /"END" 
+repend : /"REPEND" 
 inst   : /"INSTRUMENT" [rsnd-inst]
 bpm    : /"SET BPM" INTEGER
-
 
 ;@rsnd-inst : STRUMTYPE
 ; alt inst definition -
