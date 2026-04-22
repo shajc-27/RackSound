@@ -1,28 +1,28 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-rsnd-line : [rsnd-statement] [rsnd-rem]
-@rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
+@rsnd-line : [rsnd-statement]  ;([rsnd-statement] [rsnd-inst | rsnd-strum | rsnd-tone])*
+@rsnd-statement : play | stop | speed |rsnd-loop | inst
+@rsnd-loop: repeat /NEWLINE (rsnd-line [/NEWLINE])* repend
 
+@rsnd-line-num : INTEGER
+play   : /"PLAY" [rsnd-tone] (/COMMA [rsnd-tone])*
+stop   : /"STOP"
+speed  : /"SPEED" ;SPEED vs BPM?
+;playTogether : /"*PLAY" [rsnd-tone] /COMMA ([rsnd-tone])*
+repeat : /"REPEAT" INTEGER
+repend : /"REPEND" 
+inst   : /"INSTRUMENT" [rsnd-inst]
+bpm    : /"SET BPM" INTEGER
 
-play   : "PLAY" [rsnd-tone]
-stop   : "STOP" INTEGER 
-speed  : "SPEED" INTEGER 
-playTogether : "PLAY-TOGETHER" [rsnd-tone] (/"," [rsnd-tone])*
-repeat : "REPEAT" INTEGER
-repend : "END" 
-inst   : "INSTRUMENT" [rsnd-inst]
-bpm    : "SET BPM" INTEGER
-
-
-@rsnd-inst : STRUMTYPE
+;@rsnd-inst : STRUMTYPE
 ; alt inst definition -
-;@rsnd-inst     : [rsnd-inst-ref] [rsnd-strum]
-;@rsnd-inst-ref : STRING
-;@rsnd-strum    : STRUMTYPE
+@rsnd-inst     : [rsnd-inst-ref] [rsnd-strum]
+@rsnd-inst-ref : STRING
+@rsnd-strum    : STRUMTYPE
 
-/rsnd-rem  : /REM  ; don't we ignore these? '/' doesn't seem to be doing as I meant...
-@rsnd-tone : STRUMTYPE NOTE
-
+ ; ignore in expander
+;@rsnd-tone : STRUMTYPE NOTE
+@rsnd-tone : rsnd-inst NOTE
 ; @rsnd-note : STRING
 ;@rsnd-rem : [rsnd-tone] | INTEGER | VOID ; unsure what this bit even is
 ;@rsnd-tone : inst [rsnd-note] ;@rsnd-tone : (/"[" [inst] [rsnd-note] /"]")

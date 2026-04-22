@@ -2,6 +2,11 @@
 (require rsound)
 (require rsound/piano-tones)
 
+(struct playback-details (speed volume resample-rate instrument-list))
+
+(define frame-rate (48000))
+
+(define (make-instrument arg) (displayln "make-instrument: not implemented error")) 
 
 (define (make-inst-list ref path len)
   (const ref path len))
@@ -28,6 +33,14 @@
 (define (resample-table notein) (displayln "resample-table: not implemented error")) 
 (define (pitch-sound rsnd-in midi) (displayln "pitch-sound: not implemented error"))
 (define (load-in-file-to-rsound path) (displayln "load-in-file-to-rsound: not implemented error"))
+;(define (overlay-sound ref1 t1 ref2 t2) (rs-overlay (pitch-sound ref1 t1) (pitch-sound ref2 t2)))
+(define (overlay-sound . e) (displayln "overlay-sound not implemented error"))  
+(define (set-speed new-bpm) (displayln "set-speed: not implemented error"))
 
+(define (playback instruments instructions config)
+  (displayln "playback: not implemented error"))
+
+
+(provide playback) 
 
   

@@ -1,7 +1,8 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-@rsnd-line : rsnd-line-num [rsnd-statement]  ;([rsnd-statement] [rsnd-inst | rsnd-strum | rsnd-tone])*
-@rsnd-statement : play | stop | speed |rsnd-loop | inst
+@rsnd-line : [rsnd-statement | rsnd-dec]  ;([rsnd-statement] [rsnd-inst | rsnd-strum | rsnd-tone])*
+@rsnd-statement : play | stop | speed |rsnd-loop
+@rsnd-dec : inst
 @rsnd-loop: repeat /NEWLINE (rsnd-line [/NEWLINE])* repend
 
 @rsnd-line-num : INTEGER
