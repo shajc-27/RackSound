@@ -4,7 +4,13 @@
 
 (struct playback-details (speed volume resample-rate instrument-list))
 
-(define frame-rate (48000))
+(define frame-rate 48000)
+
+(define bpm 90)
+
+(define frame-counter 0)
+
+
 
 (define (make-instrument arg) (displayln "make-instrument: not implemented error")) 
 
@@ -37,8 +43,13 @@
 (define (overlay-sound . e) (displayln "overlay-sound not implemented error"))  
 (define (set-speed new-bpm) (displayln "set-speed: not implemented error"))
 
-(define (playback instruments instructions config)
-  (displayln "playback: not implemented error"))
+(define (playback instruments notes)
+  ;(displayln (string-append("Instruments: " (string instruments))))
+  (displayln instruments)
+  (displayln notes))
+;  (displayln (string-append("instructions: " (string instructions))))
+;  (displayln (string-append("config: " (string config))))
+;  (displayln "playback: not implemented error"))
 
 
 (provide playback) 

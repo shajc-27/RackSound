@@ -2,26 +2,38 @@
 (provide (matching-identifiers-out #rx"^" (all-defined-out))) ; provides all macros/functions starting with "rsnd-"
 
 (require "playback.rkt")
+(define instruction-counter 0) 
 
-(define-macro (inst-details ID STRUM ...)
-  (with-pattern
-      ([REFERENCE ID]
-       [TYPE STRUM]) 
-    #'(inst REFERENCE
-              TYPE)))
+;(define-macro (inst-details ID STRUM ...)
+;  (with-pattern
+;      ([REFERENCE ID]
+;;       [TYPE STRUM]) 
+;    #'(inst REFERENCE
+;              TYPE)))
 
-(define-macro (playback INSTRUCTS ...)
+;(define-macro (find-order instructs ...)
+ ; (with-pattern
+      ;find all parser instructions
+      ;order them in a list
+      ;oooo
+
+
+(define-macro (rsnd-program INSTRUCTS ...)
   (with-pattern
-      ([(INSTINST ...) (find-definitions 'rsnd-dec #'(INSTRUCTS ...))]
-       [(INSTRUC ... ) (find-definitions 'rsnd-statement #'(INSTRUCTS ...))])
+      ([((inst NAME TYPE) ...) #'(INSTRUCTS ...)]
+       [((play INST NOTE) ...) #'(INSTRUCTS ...)]
+       )
     #'(#%module-begin
-       (define instruments (append INSTINST ... ))
-       (define instructions (append INSTRUC ... ))
-       (define config (displayln "Put config here"))
-       (playback instruments instructions config)
+       INSTRUCTS ...
+       (define instruments
+         (apply hasheq (append (list NAME TYPE) ...)))
+       (define notes
+         (list (INST NOTE) ...))
+       (playback instruments notes)
        )))
+   
 
-;(provide (rename-out [particool-begin #%module-begin]))
+(provide (rename-out [rsnd-program #%module-begin]))
 ;(provide system-defn sim-defn simulate system vector)
 
 
@@ -40,6 +52,13 @@
 
 
 ; syntax helpers
+
+;(begin-help-assemble-instructions
+;  (require racket)
+;  (define (in-order-assemble lst arg)
+;    (
+
+
 (begin-for-syntax
   (require racket/list)
 
