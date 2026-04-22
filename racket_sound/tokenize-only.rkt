@@ -8,7 +8,7 @@
        #,@tokens)))
 (module+ reader (provide read-syntax))
 
-(define-macro (tokenize-only-mb TOKEN ...)
+(define-macro (tokenize-only TOKEN ...)
   #'(#%module-begin
      (list TOKEN ...)))
-(provide (rename-out [tokenize-only-mb #%module-begin]))
+(provide (rename-out [tokenize-only #%module-begin]))

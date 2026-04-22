@@ -24,6 +24,7 @@
       ([equal? note "B"] (+ (* octave 12) 35))
       (else "UNABLE TO PARSE STRING INTO MIDI")))
   )
+;all 
 (define (resample-table notein) (displayln "resample-table: not implemented error")) 
 (define (pitch-sound rsnd-in midi) (displayln "pitch-sound: not implemented error"))
 (define (load-in-file-to-rsound path) (displayln "load-in-file-to-rsound: not implemented error"))

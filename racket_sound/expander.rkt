@@ -6,11 +6,11 @@
 ; we use with-pattern to create the string line-x using NUM
 ; syntax/loc and caller-stx are was of passing around source locations
 ; for error handling
-(define-macro (rsnd-line NUM STATEMENT ...) 
+(define-macro (rsnd-line STATEMENT ...) 
   (with-pattern ([LINE-NUM (prefix-id "line-" #'NUM
                                       #:source #'NUM)]) ; assigns LINE-NUM's srcloc to be NUM's srcloc
     (syntax/loc caller-stx                              ; assigns this new syntax's srcloc to be rsnd-line's srcloc
-      (define (LINE-NUM) (void) STATEMENT ...))))
+      (define STATEMENT ...))))
 
 ; this macro creates a module starting with #%module-begin, which
 ; all top-level modules require
@@ -86,13 +86,12 @@
 ;
 ;(define (rsnd- 
 
-(define-macro (rsnd-play INSTRUMENT KEY)
-  (displayln "rsnd-play not implemented"))
-
-(define-macro (rsnd-stop ARGUMENT)
-  (for ([n (in-range ARGUMENT)])
-    (stop)))
-(provide rsnd-stop) 
+(define (rsnd-play arg)
+  (displayln "rsnd-play: not implemented"))
+(define (rsnd-stop arg)
+  (displayln "rsnd-stop: not implemented"))
+(define (rsnd-inst arg)
+  (displayln "rnsd-inst: not implemented"))
 
 ;the library provided sounds can be found in %appdata%/Racket/[version]/pkgs/rsound/rsound/contrib/
 ;(define-macro (play tone))
@@ -104,11 +103,3 @@
   
 
   ;(cond [(string-prefix input "C")  
-
-; Don't think these apply to ours atm
-(define (rsnd-print . vals) ; rsnd-print could have an arbitrary number of values (hence the .)
-  (displayln (string-append* (map ~a vals)))) ; map the values to strings (necessary if they're numbers)
-(define (rsnd-sum . vals) (apply + vals)) ; apply the + function to the values
-(define (rsnd-expr expr)
-  (if (integer? expr) (inexact->exact expr) expr)) ; simple if: numbers become exact numbers
-; otherwise, if expr is something like (rsnd-sum 1 2 3), return expr will return the result of calling rsnd-sum

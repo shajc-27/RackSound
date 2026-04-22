@@ -13,7 +13,6 @@
     ["\n" (token 'NEWLINE lexeme)]
     [whitespace (token lexeme #:skip? #t)]
     [(from/stop-before ";" "\n") (token 'COMMENT lexeme)]
-    
     [(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT" "END" "PLAY*") (token lexeme lexeme)]
     [strum     (token 'STRUMTYPE lexeme)]
     [note      (token 'NOTE lexeme)]

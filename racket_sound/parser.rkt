@@ -1,9 +1,9 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-@rsnd-line : [rsnd-statement] [rsnd-comment]
+@rsnd-line : rsnd-line-num [rsnd-statement] [rsnd-inst | rsnd-strum | rsnd-tone]* 
 @rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
 
-
+@rsnd-line-num : INTEGER
 play   : /"PLAY" [rsnd-tone]
 stop   : /"STOP" INTEGER 
 speed  : /"SPEED" INTEGER  ;SPEED vs BPM?
@@ -20,7 +20,7 @@ bpm    : /"SET BPM" INTEGER
 @rsnd-inst-ref : STRING
 @rsnd-strum    : STRUMTYPE
 
-rsnd-comment  : COMMENT  ; ignore in expander
+ ; ignore in expander
 ;@rsnd-tone : STRUMTYPE NOTE
 @rsnd-tone : rsnd-inst NOTE
 ; @rsnd-note : STRING
