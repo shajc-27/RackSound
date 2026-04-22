@@ -8,7 +8,7 @@ INSTRUMENT 'ra' PIANO
 PLAY 'ca' E5
 PLAY* 'ca' E5 'ra' E5
 REPEAT 5
-;PLAY ["va" E5] ; is this meant to be PLAY-TOGETHER, or...?
+PLAY 'ca' B3
 END
 
 ; in the current context, don't get the reasoning for naming the piano...

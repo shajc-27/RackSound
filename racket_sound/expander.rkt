@@ -86,6 +86,13 @@
 ;
 ;(define (rsnd- 
 
+(define-macro (rsnd-play INSTRUMENT KEY)
+  (displayln "rsnd-play not implemented"))
+
+(define-macro (rsnd-stop ARGUMENT)
+  (for ([n (in-range ARGUMENT)])
+    (stop)))
+(provide rsnd-stop) 
 
 ;the library provided sounds can be found in %appdata%/Racket/[version]/pkgs/rsound/rsound/contrib/
 ;(define-macro (play tone))

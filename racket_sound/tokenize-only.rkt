@@ -4,7 +4,7 @@
 (define (read-syntax path port)
   (define tokens (apply-tokenizer make-tokenizer port))
   (strip-bindings
-   #`(module basic-tokens-mod basic/tokenize-only
+   #`(module rsnd-tokens-mod rsnd/tokenize-only
        #,@tokens)))
 (module+ reader (provide read-syntax))
 
