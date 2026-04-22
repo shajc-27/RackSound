@@ -1,40 +1,45 @@
 #lang br 
 (require brag/support)
-
-;(define-lex-abbrev keyfamily (:+ (char-set "ABCDEFG")))
-;(define-lex-abbrev octave (:+ (char-set "12345678")))
-;we're doing octaves 0-8 here.
-(define-lex-abbrev note
-  (:: (:or (char-set "ABCDEFG")) (:or (char-set "12345678"))))
-(define-lex-abbrev strum (:or "PIANO" "DRUM" "SINE"))
-
+(define-lex-abbrev digits (:+ (char-set "0123456789")))
 (define basic-lexer
   (lexer-srcloc
-    ["\n" (token 'NEWLINE lexeme)]
-    [whitespace (token lexeme #:skip? #t)]
-    [(from/stop-before ";" "\n") (token lexeme #:skip? #t)]
-    ;[(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT" "END" "PLAY*") (token lexeme lexeme)]
-    [strum     (token 'STRUMTYPE lexeme)]
-    [note      (token 'NOTE lexeme)]
-    [(:+ (char-set "0123456789")) (token 'INTEGER (string->number lexeme))]
-    [#\[          (token 'LBRACKET)]
-    [#\]          (token 'RBRACKET)]
-    [#\,          (token 'COMMA)]
-    ["INSTRUMENT" (token 'INSTRUMENT lexeme)]
-    ["PLAY" (token 'PLAY lexeme)]
-    ["STOP" (token 'STOP lexeme)]
-    ["SPEED" (token 'SPEED lexeme)]
-    ["REPEAT" (token 'REPEAT lexeme)]
-    ["REPEND" (token 'REPEND lexeme)]
-    ;["*PLAY" (token 'PLAYTOGETHER lexeme)]
-    ["," (token 'COMMA lexeme)]
+   [whitespace (token lexeme #:skip? #t)] ; skip whitespace
+   [(from/stop-before ";" "\n") (token lexeme #:skip? #t)] ; skip comments
 
-    
-    [(:or (from/to "\"" "\"") (from/to "'" "'"))
+   ; punctuation tokens
+   ["{" (token 'LBRACE lexeme)]
+   ["}" (token 'RBRACE lexeme)]
+   ["(" (token 'LPAREN lexeme)]
+   [")" (token 'RPAREN lexeme)]
+   [":" (token 'COLON lexeme)]
+   ["," (token 'COMMA lexeme)]
+
+   ; waveform system tokens
+   ["waveform" (token 'WAVEFORM lexeme)] ; defines a waveform
+   ["wavetype" (token 'WAVETYPE lexeme)]
+   ["filter" (token 'FILTER lexeme)]
+   ["frequency" (token 'FREQUENCY lexeme)]
+   ;["total-mass" (token 'MASS lexeme)]
+   
+   ; simulation tokens
+   ["display" (token 'DISPLAY lexeme)]
+   ["width" (token 'WIDTH lexeme)]
+   ["height" (token 'HEIGHT lexeme)]
+   ["title" (token 'TITLE lexeme)]
+
+   ["visualize" (token 'VISUALIZE lexeme)]
+
+   ; data structures
+   [(:seq alphabetic (:* (:or alphabetic numeric "$")))
+    (token 'ID (string->symbol lexeme))] ; identifier
+   [(:seq (:? "-") digits) (token 'INTEGER (string->number lexeme))]
+   [(:or (from/to "\"" "\"") (from/to "'" "'"))
      (token 'STRING
             (substring lexeme
                         1 (sub1 (string-length lexeme)
-    )))]
-))
+    )))])) ; integer
+   
+
+   
 
 (provide basic-lexer)
