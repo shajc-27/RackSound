@@ -10,17 +10,19 @@
 
 (define frame-counter 0)
 
+;(define (make-inst-list list)
+ ; (list (for ([(k v) (in-hash list)])
+ ;         (cons k v))))
+  
 
 
 (define (make-instrument arg) (displayln "make-instrument: not implemented error")) 
-
-(define (make-inst-list ref path len)
-  (const ref path len))
 (define (string->midi input)
   (let* ([note (substring input 0 1)]
     [octave (string->number (substring input 1 2))])
+    (displayln octave)
     (cond
-      ([or (< octave 0) (< octave 7)] (display "Error in expander: octave too large or too small. Range is 0-7"))
+      ([or (< octave 0) (> octave 7)] (display "Error in expander: octave too large or too small. Range is 0-7"))
       ([equal? note "C"] (+ (* octave 12) 24))
       ([or [equal? note "Db"] [equal? note "C#"]] (+ (* octave 12) 25))
       ([equal? note "D"] (+ (* octave 12) 26))
@@ -35,22 +37,38 @@
       ([equal? note "B"] (+ (* octave 12) 35))
       (else "UNABLE TO PARSE STRING INTO MIDI")))
   )
-;all 
+;all
+#|
 (define (resample-table notein) (displayln "resample-table: not implemented error")) 
 (define (pitch-sound rsnd-in midi) (displayln "pitch-sound: not implemented error"))
 (define (load-in-file-to-rsound path) (displayln "load-in-file-to-rsound: not implemented error"))
 ;(define (overlay-sound ref1 t1 ref2 t2) (rs-overlay (pitch-sound ref1 t1) (pitch-sound ref2 t2)))
 (define (overlay-sound . e) (displayln "overlay-sound not implemented error"))  
 (define (set-speed new-bpm) (displayln "set-speed: not implemented error"))
+|#
+
+(define (make-sounds instrument note)
+  (if (equal? note '())
+      null
+      (list
+       ;(displayln (car note))
+       (if (equal? (hash-ref instrument (car (car note))) "PIANO")
+           (piano-tone (string->midi(cdr (car note))))
+           (synth-note "vgame" 49 (cdr (car note)) 22010)) (make-sounds instrument (cdr note)))))
+
+(define (perform soundlist)
+  (displayln (list-ref soundlist 0))
+  (cond
+    [(rsound? (list-ref soundlist 0 )) (play (resample-to-rate 48000 (list-ref soundlist 0))) (sleep 1) (perform (cdr soundlist)) ]
+    [(displayln "Done" )]))
+                  
+
 
 (define (playback instruments notes)
-  ;(displayln (string-append("Instruments: " (string instruments))))
-  (displayln instruments)
-  (displayln notes))
-;  (displayln (string-append("instructions: " (string instructions))))
-;  (displayln (string-append("config: " (string config))))
-;  (displayln "playback: not implemented error"))
-
+  (perform (make-sounds instruments notes))
+  
+  )
+  
 
 (provide playback) 
 

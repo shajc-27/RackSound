@@ -5,5 +5,14 @@ PLAY 'ca' E5
 PLAY 'ca' E5
 ;REPEAT 5
 PLAY 'ca' B3
+
+PLAY 'ca' B3
+PLAY 'ca' B3
+PLAY 'ca' B3
+PLAY 'ca' B3
+PLAY 'ca' B3
+PLAY 'ca' B3
+PLAY 'ca' B3
+PLAY 'ca' B3
 ;REPEND 
 
