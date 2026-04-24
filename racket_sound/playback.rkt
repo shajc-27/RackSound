@@ -11,16 +11,16 @@
 (define frame-counter 0)
 
 ;(define (make-inst-list list)
- ; (list (for ([(k v) (in-hash list)])
- ;         (cons k v))))
+; (list (for ([(k v) (in-hash list)])
+;         (cons k v))))
   
 
 
 (define (make-instrument arg) (displayln "make-instrument: not implemented error")) 
 (define (string->midi input)
   (let* ([note (substring input 0 1)]
-    [octave (string->number (substring input 1 2))])
-    (displayln octave)
+         [octave (string->number (substring input 1 2))])
+    ;(displayln octave)
     (cond
       ([or (< octave 0) (> octave 7)] (display "Error in expander: octave too large or too small. Range is 0-7"))
       ([equal? note "C"] (+ (* octave 12) 24))
@@ -53,23 +53,29 @@
       (list
        ;(displayln (car note))
        (if (equal? (hash-ref instrument (car (car note))) "PIANO")
-           (piano-tone (string->midi(cdr (car note))))
-           (synth-note "vgame" 49 (cdr (car note)) 22010)) (make-sounds instrument (cdr note)))))
+           (resample-to-rate 48000 (piano-tone (string->midi(cdr (car note)))))
+           (resample-to-rate 48000 (synth-note "vgame" 49 (cdr (car note)) 22010))) (make-sounds instrument (cdr note)))))
 
-(define (perform soundlist)
-  (displayln (list-ref soundlist 0))
-  (cond
-    [(rsound? (list-ref soundlist 0 )) (play (resample-to-rate 48000 (list-ref soundlist 0))) (sleep 1) (perform (cdr soundlist)) ]
-    [(displayln "Done" )]))
-                  
-
+;(define (perform soundlist)
+ ; (displayln (list-ref soundlist 0))
+  ;(if (null? soundlist)
+   ;   (void)
+    ;  (begin
+     ;   (play (list-ref soundlist 0))
+      ;  (sleep 1)
+       ; (perform (cdr soundlist)))))
+;        (cond
+;          [(rsound? (list-ref soundlist 0)) (begin (play (list-ref soundlist 0)) (sleep 1) (perform (cdr soundlist)))]
+;          [else (displayln "Done" )]))
+;                  
+(define (append-all soundlist)
+  (rs-append* (flatten soundlist)))
 
 (define (playback instruments notes)
-  (perform (make-sounds instruments notes))
+  (play (append-all (make-sounds instruments notes)))
   
   )
   
 
 (provide playback) 
 
-  
