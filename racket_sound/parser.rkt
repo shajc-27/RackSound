@@ -19,10 +19,11 @@ bpm    : /"SET BPM" INTEGER
 @rsnd-inst     : [rsnd-inst-ref] [rsnd-strum]
 @rsnd-inst-ref : STRING
 @rsnd-strum    : STRUMTYPE
+@rsnd-tone : rsnd-inst NOTE ; ;change tone to only be the ref?
 
 rsnd-comment  : COMMENT  ; ignore in expander
+
 ;@rsnd-tone : STRUMTYPE NOTE
-@rsnd-tone : rsnd-inst NOTE
 ; @rsnd-note : STRING
 ;@rsnd-rem : [rsnd-tone] | INTEGER | VOID ; unsure what this bit even is
 ;@rsnd-tone : inst [rsnd-note] ;@rsnd-tone : (/"[" [inst] [rsnd-note] /"]")

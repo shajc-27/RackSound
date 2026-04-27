@@ -18,7 +18,7 @@
     [strum     (token 'STRUMTYPE lexeme)]
     [note      (token 'NOTE lexeme)]
     [(:+ (char-set "0123456789")) (token 'INTEGER (string->number lexeme))]
-    
+
     [(:or (from/to "\"" "\"") (from/to "'" "'"))
      (token 'STRING
             (substring lexeme
