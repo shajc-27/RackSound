@@ -20,33 +20,9 @@ bpm    : /"SET BPM" INTEGER
 @rsnd-inst     : [rsnd-inst-ref] [rsnd-strum]
 @rsnd-inst-ref : STRING
 @rsnd-strum    : STRUMTYPE
-
- ; ignore in expander
-;@rsnd-tone : STRUMTYPE NOTE
 @rsnd-tone : rsnd-inst NOTE
+
+; @rsnd-tone : STRUMTYPE NOTE
 ; @rsnd-note : STRING
 ;@rsnd-rem : [rsnd-tone] | INTEGER | VOID ; unsure what this bit even is
 ;@rsnd-tone : inst [rsnd-note] ;@rsnd-tone : (/"[" [inst] [rsnd-note] /"]")
-
-
-; defining statements
-#|rsnd-line : line-num [statement] [rsnd-arg]*
-;rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
-;rsnd-arg : INTEGER | strum | key 
-;@line-num : INTEGER
-;@statement : inst | play | stop | speed | playTogether | repeat
-
-;inst   : "INSTRUMENT" strum
-;play   : "PLAY" strum key 
-;stop   : "STOP"  INTEGER
-;speed  : "SPEED" INTEGER
-;playTogether  : "PLAY-TOGETHER" strum key strum key 
-;repeat : "REPEAT" INTEGER
-;repend : "END" ;
-
-;key    :  STRING
-;strum  : "TRUMPET" | "PIANO" | "DRUM" | "FLUTE" | "PURE"  ;and so on.
-
-; @ = unwraps a redundant statement line, basically stops from each line being in layered parentheses
-; / = "Ignorer", parser throws away after.
-; to my knowledge '@' is moreso for readability, since it just "hides" the stuff.
