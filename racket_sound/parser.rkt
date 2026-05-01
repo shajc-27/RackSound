@@ -1,5 +1,6 @@
 #lang brag
 rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
+<<<<<<< HEAD
 @rsnd-line : [rsnd-statement] [rsnd-comment]
 @rsnd-statement : play | stop | speed | playTogether | repeat | repend | inst
 
@@ -25,6 +26,32 @@ rsnd-comment  : COMMENT  ; ignore in expander
 
 ;@rsnd-tone : STRUMTYPE NOTE
 ; @rsnd-note : STRING
+=======
+rsnd-line : (rsnd-statement (rsnd-rem))
+@rsnd-statement : rsnd-play | rsnd-stop | rsnd-speed | rsnd-playTogether | rsnd-repeat | rsnd-repend | rsnd-instrument-dec
+
+rsnd-play   : /"PLAY" [rsnd-tone]
+rsnd-stop   : /"STOP" INTEGER 
+rsnd-speed  : /"SPEED" INTEGER  ;SPEED vs BPM?
+rsnd-playTogether : /"PLAY*" [rsnd-tone] (/","[rsnd-tone])*
+rsnd-repeat : /"REPEAT" INTEGER
+rsnd-repend : /"END" 
+rsnd-instrument-dec   : /"INSTRUMENT" [rsnd-inst]
+rsnd-bpm    : /"SET BPM" INTEGER
+
+rsnd-comment : COMMENT
+
+
+@rsnd-inst : [rsnd-inst-ref] [rsnd-strum]
+@rsnd-inst-ref : STRING
+
+@rsnd-rem : [rsnd-tone] | INTEGER | VOID
+@rsnd-tone (/"[" (rsnd-inst rsnd-note)+ / "]")
+@rsnd-strum : STRING ;etc
+@rsnd-note : STRING
+@rsnd-tone : STRUMTYPE NOTE
+
+>>>>>>> f4df69d7625b2fb1de0a72bb5b43cf285b58c23e
 ;@rsnd-rem : [rsnd-tone] | INTEGER | VOID ; unsure what this bit even is
 ;@rsnd-tone : inst [rsnd-note] ;@rsnd-tone : (/"[" [inst] [rsnd-note] /"]")
 
