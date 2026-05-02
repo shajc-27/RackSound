@@ -6,13 +6,13 @@
 (define-macro (rsnd-program INSTRUCTS ...)
   (with-pattern
       ([((inst NAME TYPE) ...) (find-definitions 'inst #'(INSTRUCTS ...))]
-       [((play INST NOTE) ...) (find-definitions 'play #'(INSTRUCTS ...))]
+       [((play INST NOTE ... LENGTH) ...) (find-definitions 'play #'(INSTRUCTS ...))]
        )
     #'(#%module-begin
        (define instruments
          (apply hasheq (append (list NAME TYPE) ...)))
        (define notes
-         (list (cons INST NOTE) ...))
+         (list (list INST NOTE ... LENGTH) ...))
        ;(displayln instruments)
        ;(displayln notes)
        (playback instruments notes)

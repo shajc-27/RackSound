@@ -5,8 +5,12 @@ rsnd-program : [rsnd-line] (/NEWLINE [rsnd-line])*
 @rsnd-dec : inst
 @rsnd-loop: repeat /NEWLINE (rsnd-line [/NEWLINE])* repend
 
+
 @rsnd-line-num : INTEGER
-play   : /"PLAY" [rsnd-tone] (/COMMA [rsnd-tone])*
+;play   : /"PLAY" [rsnd-tone] (/COMMA [rsnd-tone])* [INTEGER]
+play   : /"PLAY" [rsnd-tone] (NOTE)* [INTEGER]
+;play   : /"PLAY" LPAREN [rsnd-tone] (NOTE)* INTEGER RPAREN ;rmv comma, note that only one note
+; goal : PLAY \LPAREN [INST-REF] [NOTES]* [DURATION] \RPAREN
 stop   : /"STOP"
 speed  : /"SPEED" ;SPEED vs BPM?
 ;playTogether : /"*PLAY" [rsnd-tone] /COMMA ([rsnd-tone])*

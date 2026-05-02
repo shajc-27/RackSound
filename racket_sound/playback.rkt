@@ -18,8 +18,9 @@
 
 (define (make-instrument arg) (displayln "make-instrument: not implemented error")) 
 (define (string->midi input)
-  (let* ([note (substring input 0 1)]
-         [octave (string->number (substring input 1 2))])
+  (displayln input)
+  (let* ([note (substring (car input) 0 1)]
+         [octave (string->number (substring (car input) 1 2))])
     ;(displayln octave)
     (cond
       ([or (< octave 0) (> octave 7)] (display "Error in expander: octave too large or too small. Range is 0-7"))
