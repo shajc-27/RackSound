@@ -9,7 +9,7 @@ PLAY 'ca' B3 63
 PLAY 'ca' B3 11
 PLAY 'ca' B3 44
 PLAY 'ca' B3 77
-PLAY 'ca' B3 668
+PLAY 'ca' B3 25
 PLAY 'ca' A5 482
 PLAY 'ca' B3 294
 PLAY 'ca' B3 53
