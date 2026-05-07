@@ -13,23 +13,14 @@
     ["\n" (token 'NEWLINE lexeme)]
     [whitespace (token lexeme #:skip? #t)]
     [(from/stop-before ";" "\n") (token lexeme #:skip? #t)]
-    ;[(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT" "END" "PLAY*") (token lexeme lexeme)]
+
+    [(:or "INSTRUMENT" "PLAY" "STOP" "SPEED" "REPEAT" "END" "PLAY*") (token lexeme lexeme)]
     [strum     (token 'STRUMTYPE lexeme)]
     [note      (token 'NOTE lexeme)]
     [(:+ (char-set "0123456789")) (token 'INTEGER (string->number lexeme))]
     [#\[          (token 'LBRACKET)]
     [#\]          (token 'RBRACKET)]
     [#\,          (token 'COMMA)]
-    ["INSTRUMENT" (token 'INSTRUMENT lexeme)]
-    ["PLAY" (token 'PLAY lexeme)]
-    ["STOP" (token 'STOP lexeme)]
-    ["SPEED" (token 'SPEED lexeme)]
-    ["REPEAT" (token 'REPEAT lexeme)]
-    ["REPEND" (token 'REPEND lexeme)]
-    ;["*PLAY" (token 'PLAYTOGETHER lexeme)]
-    ["," (token 'COMMA lexeme)]
-
-    
     [(:or (from/to "\"" "\"") (from/to "'" "'"))
      (token 'STRING
             (substring lexeme

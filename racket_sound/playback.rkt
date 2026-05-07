@@ -35,27 +35,17 @@
       ) (+ (* octave 12) addto)
 ))
 
-;all
-#|
-(define (resample-table notein) (displayln "resample-table: not implemented error")) 
-(define (pitch-sound rsnd-in midi) (displayln "pitch-sound: not implemented error"))
-(define (load-in-file-to-rsound path) (displayln "load-in-file-to-rsound: not implemented error"))
-;(define (overlay-sound ref1 t1 ref2 t2) (rs-overlay (pitch-sound ref1 t1) (pitch-sound ref2 t2)))
-(define (overlay-sound . e) (displayln "overlay-sound not implemented error"))  
-(define (set-speed new-bpm) (displayln "set-speed: not implemented error"))
-|#
-
 (define (make-sounds instrument notes)
   (define (chord-maker note)
     (let ([notes-only (filter string? note)]
-          [make-note (displayln "")])
+          [make-note ""])
 
       (if (equal? (hash-ref instrument (car note)) "PIANO")
           (set! make-note (lambda (x) (piano-tone (string->midi x))))
-          (set! make-note (lambda (x) (synth-note "vgame" 49 x 22010)))
+          (set! make-note (lambda (x) (synth-note "vgame" 49 (string->midi x) (last note))))
           )
       (if (> (length note) 2)
-          (rs-overlay* (map (lambda (x) (resample-to-rate 4800 (make-note x))) (cdr notes-only)))
+          (rs-overlay* (map (lambda (x) (resample-to-rate 48000 (make-note x))) (cdr notes-only)))
           (resample-to-rate 48000 (make-note notes-only))
   )))
 
