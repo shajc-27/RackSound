@@ -53,7 +53,7 @@
       (if (equal? (hash-ref instrument (car note)) "PIANO")
           (set! make-note (lambda (x) (piano-tone (string->midi x))))
           (set! make-note (lambda (x) (synth-note "vgame" 49 x 22010)))
-          ) 
+          )
       (if (> (length note) 2)
           (rs-overlay* (map (lambda (x) (resample-to-rate 4800 (make-note x))) (cdr notes-only)))
           (resample-to-rate 48000 (make-note notes-only))

@@ -16,3 +16,4 @@ PLAY 'ca' B3 53
 PLAY 'ca' B3 19
 ;REPEND 
 
+;Main concern is clipping; also, want to add synths.
