@@ -13,23 +13,23 @@ PLAY 'ref' note* len
 
 <h2>EX PROGRAMS:</h2>
 <p>
-INSTRUMENT 'ca' PIANO\n
-PLAY 'ca' E5 A4 B6 24000\n
-PLAY 'ca' A5 E2 24000\n
-PLAY 'ca' B3 24000\n
+INSTRUMENT 'ca' PIANO  
+PLAY 'ca' E5 A4 B6 24000  
+PLAY 'ca' A5 E2 24000  
+PLAY 'ca' B3 24000  
 </p> <p>
-<n>INSTRUMENT 'ra' SINE<\n>
-<n>PLAY 'ra' B5 48000<\n>
-<n>PLAY 'ra' A5 24000<\n>
-<n>PLAY 'ra' F5 24000<\n>
-<n>PLAY 'ra' B5 48000<\n>
-<n>PLAY 'ra' A5 24000<\n>
-<n>PLAY 'ra' F5 24000<\n>
-<n>PLAY 'ra' B5 48000<\n>
-<n>PLAY 'ra' A5 24000<\n>
-<n>PLAY 'ra' E5 12000<\n>
-<n>PLAY 'ra' D5 12000<\n>
-<n>PLAY 'ra' E5 48000<\n>
+INSTRUMENT 'ra' SINE  
+PLAY 'ra' B5 48000  
+PLAY 'ra' A5 24000  
+PLAY 'ra' F5 24000  
+PLAY 'ra' B5 48000  
+PLAY 'ra' A5 24000  
+PLAY 'ra' F5 24000  
+PLAY 'ra' B5 48000  
+PLAY 'ra' A5 24000  
+PLAY 'ra' E5 12000  
+PLAY 'ra' D5 12000  
+PLAY 'ra' E5 48000  
 </p>
 
 <h2>INSTRUCTIONS</h2>
