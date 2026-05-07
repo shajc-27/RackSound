@@ -18,18 +18,18 @@ PLAY 'ca' E5 A4 B6 24000\n
 PLAY 'ca' A5 E2 24000\n
 PLAY 'ca' B3 24000\n
 </p> <p>
-INSTRUMENT 'ra' SINE\n
-PLAY 'ra' B5 48000\n
-PLAY 'ra' A5 24000\n
-PLAY 'ra' F5 24000\n
-PLAY 'ra' B5 48000\n
-PLAY 'ra' A5 24000\n
-PLAY 'ra' F5 24000\n
-PLAY 'ra' B5 48000\n
-PLAY 'ra' A5 24000\n
-PLAY 'ra' E5 12000\n
-PLAY 'ra' D5 12000\n
-PLAY 'ra' E5 48000\n
+INSTRUMENT 'ra' SINE<\n>
+PLAY 'ra' B5 48000<\n>
+PLAY 'ra' A5 24000<\n>
+PLAY 'ra' F5 24000<\n>
+PLAY 'ra' B5 48000<\n>
+PLAY 'ra' A5 24000<\n>
+PLAY 'ra' F5 24000<\n>
+PLAY 'ra' B5 48000<\n>
+PLAY 'ra' A5 24000<\n>
+PLAY 'ra' E5 12000<\n>
+PLAY 'ra' D5 12000<\n>
+PLAY 'ra' E5 48000<\n>
 </p>
 
 <h2>INSTRUCTIONS</h2>
